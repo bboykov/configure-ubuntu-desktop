@@ -99,3 +99,9 @@
         schema: org.gnome.shell.extensions.dash-to-dock
         key: dock-fixed
         value: "false"
+
+    - name: Set show battery percentage
+      gsettings:
+        schema: org.gnome.desktop.interface
+        key: show-battery-percentage
+        value: "true"
