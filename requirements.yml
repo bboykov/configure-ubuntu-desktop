@@ -8,3 +8,6 @@
   src: https://github.com/rsjethani/ansible-role-vagrant.git
   path: ./roles
 
+- name: google-chrome
+  src: https://github.com/patrick-hill/ansible-role-chrome.git
+  path: ./roles

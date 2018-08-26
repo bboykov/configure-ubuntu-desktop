@@ -1,0 +1,7 @@
+---
+- name: Install desktop applications
+  hosts: localhost
+  tasks:
+    - name: Install Google Chrome
+      import_role:
+        name: google-chrome
