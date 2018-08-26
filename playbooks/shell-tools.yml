@@ -1,0 +1,121 @@
+---
+- name: Configure the shell environment
+  hosts: localhost
+  tasks:
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600 # 1h
+      become: True
+
+    - name: Install packages with APT
+      apt:
+        name: "{{ item }}"
+        state: present
+      become: True
+      with_items:
+        - bash-completion
+        - curl
+        - git
+        - xclip
+        - xsel
+        - tmux
+        - todotxt-cli
+        - vim
+        - emacs # prereq for spacemacs
+
+    - name: Install packages with PIP
+      pip:
+        name: "{{ item }}"
+        state: present
+      become: True
+      with_items:
+        - grip # Prereq for vim-markdown-preview plugin
+
+    ################
+    # dotfiles
+    ################
+    - name: Check if dotfiles repo has been cloned
+      stat:
+        path: $HOME/dotfiles/
+      register: is_dotfiles_cloned
+      changed_when: False
+
+    - name: Clone dotfiles repo
+      git:
+        repo: https://github.com/bboykov/dotfiles.git
+        dest: $HOME/dotfiles
+        version: master
+      register: clone_dotfiles_repo
+      when: is_dotfiles_cloned.stat.exists == False
+
+    - name: Run dotfiles script
+      shell: |
+        cd ~/dotfiles && ./dotfiles.sh
+      args:
+        executable: /bin/bash
+      when: clone_dotfiles_repo.changed
+
+    ################
+    # tmux
+    ################
+    - name: Check if tmux TPM repo is present
+      stat:
+        path: ~/.tmux/plugins/tpm
+      register: tmux_tpm_repo_is_present
+      changed_when: False
+
+    - name: Clone tmux TPM repo
+      git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: ~/.tmux/plugins/tpm
+        depth: 1
+      when: tmux_tpm_repo_is_present.stat.exists == False
+
+    ################
+    # vim
+    ################
+    - name: Check if vim-plug has been installed
+      stat:
+        path: $HOME/.vim/autoload/plug.vim
+      register: is_vim_plug_installed
+      changed_when: False
+
+    - name: Install vim-plug
+      shell: |
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      args:
+        executable: /bin/bash
+      when: is_vim_plug_installed.stat.exists == False
+
+    - name: Install plugins with vim-plug - vim +PlugInstall +qall
+      command: |
+        vim +PlugInstall +qall
+      when: is_vim_plug_installed.stat.exists == False
+
+    - name: Update plugins with vim-plug - vim +PlugUpdate +qall
+      command: |
+        vim +PlugUpdate +qall
+
+    ################
+    # spacemacs
+    ################
+    - name: Clone spacemacs repo
+      git:
+        repo: https://github.com/syl20bnr/spacemacs
+        dest: ~/.emacs.d
+        version: master
+        depth: 1
+
+    ################
+    # misc
+    ################
+    - name: Clone liquidprompt repo
+      git:
+        repo: https://github.com/nojhan/liquidprompt.git
+        dest: ~/liquidprompt
+        version: master
+        depth: 1
+
+

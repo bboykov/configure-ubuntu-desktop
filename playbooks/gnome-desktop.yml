@@ -1,0 +1,101 @@
+---
+- name: Configure GNOME Desktop settings
+  hosts: localhost
+  tasks:
+    - name: Update the APT cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600 # 1h
+      become: true
+
+    - name: Install packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      become: true
+      with_items:
+        - gnome-tweak-tool
+
+    - name: Set locale
+      copy:
+        content: |
+          LANG=en_US.UTF-8
+          LC_NUMERIC=en_GB.UTF-8
+          LC_TIME=en_US.UTF-8
+          LC_MONETARY=en_GB.UTF-8
+          LC_PAPER=en_GB.UTF-8
+          LC_NAME=en_GB.UTF-8
+          LC_ADDRESS=en_GB.UTF-8
+          LC_TELEPHONE=en_GB.UTF-8
+          LC_MEASUREMENT=en_GB.UTF-8
+          LC_IDENTIFICATION=en_GB.UTF-8
+          LC_ALL=
+        dest: /etc/default/locale
+      become: true
+
+    - name: Ensure ~/.font exists
+      file:
+        path: ~/.fonts
+        state: directory
+        mode: 0755
+
+    - name: Download DejaVuSansMono nerd font
+      unarchive:
+        src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/DejaVuSansMono.zip
+        dest: ~/.fonts
+        remote_src: yes
+      register: font_installed
+
+    - name: Run fc-cache -fv
+      shell: |
+        fc-cache -fv
+      args:
+        executable: /bin/bash
+      when: font_installed.changed
+
+    # Set the color theme by running `base16_tomorrow-night` in the shell
+    - name: Clone base16-shell repo
+      git:
+        repo: https://github.com/chriskempson/base16-shell.git
+        dest: ~/.config/base16-shell
+        version: master
+        depth: 1
+
+    ################
+    # gsettings
+    ################
+    - name: Set monospace font
+      gsettings:
+        schema: org.gnome.desktop.interface
+        key: monospace-font-name
+        value: "DejaVuSansMono Nerd Font Mono 12"
+
+    - name: Set clock-show-date
+      gsettings:
+        schema: org.gnome.desktop.interface
+        key: clock-show-date
+        value: "true"
+
+    - name: Set list-view in the file browser
+      gsettings:
+        schema: org.gnome.nautilus.preferences
+        key: default-folder-viewer
+        value: "list-view"
+
+    - name: Set input sources per window
+      gsettings:
+        schema: org.gnome.desktop.input-sources
+        key: per-window
+        value: "true"
+
+    - name: Set Dock position on screen
+      gsettings:
+        schema: org.gnome.shell.extensions.dash-to-dock
+        key: dock-position
+        value: "BOTTOM"
+
+    - name: Set Dock auto-hide
+      gsettings:
+        schema: org.gnome.shell.extensions.dash-to-dock
+        key: dock-fixed
+        value: "false"

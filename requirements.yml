@@ -1,0 +1,10 @@
+# Usage:
+# ansible-galaxy install -r  ansible/requirements.yml
+- name: virtualbox
+  src: https://github.com/escalate/ansible-virtualbox.git
+  path: ./roles
+
+- name: vagrant
+  src: https://github.com/rsjethani/ansible-role-vagrant.git
+  path: ./roles
+
