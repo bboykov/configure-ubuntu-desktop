@@ -1,0 +1,39 @@
+---
+- name: Configure Ubuntu on bare-metal as primary desktop
+  hosts: localhost
+  tasks:
+    - name: Update the APT cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600 # 1h
+      become: true
+
+      # https://www.tecmint.com/tlp-increase-and-optimize-linux-battery-life/
+    - name: Add ppa:linrunner/tlp to install latest tlp
+      apt_repository:
+        repo: 'ppa:jonathonf/vim'
+        state: present
+      become: true
+
+    - name: Install battery enchancements
+      apt:
+        name: "{{ item }}"
+        state: present
+      become: true
+      with_items:
+        - tlp
+        - tlp-rdw
+
+    - name: Install graphic packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      become: true
+      with_items:
+        - ubuntu-restricted-extras
+        - libdvdnav4
+        - libdvdread4
+        - gstreamer1.0-plugins-bad
+        - gstreamer1.0-plugins-ugly
+        - libdvd-pkg
+
