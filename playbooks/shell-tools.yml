@@ -22,6 +22,7 @@
         - tmux
         - todotxt-cli
         - vim
+        - vim-gtk # to install +clipboard
         - emacs # prereq for spacemacs
 
     - name: Install packages with PIP
@@ -117,5 +118,3 @@
         dest: ~/liquidprompt
         version: master
         depth: 1
-
-
