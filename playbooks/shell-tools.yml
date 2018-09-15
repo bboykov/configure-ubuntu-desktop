@@ -119,3 +119,23 @@
         dest: ~/liquidprompt
         version: master
         depth: 1
+
+    ################
+    # Terraform
+    ################
+    - name: Clone tfenv repo
+      git:
+        repo: https://github.com/kamatama41/tfenv.git
+        dest: ~/.tfenv
+        version: master
+        depth: 1
+
+    - name: Create symlinks from ~/.tfenv/bin/
+      file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+      with_items:
+        - { src: ~/.tfenv/bin/terraform , dest: ~/bin/terraform }
+        - { src: ~/.tfenv/bin/tfenv , dest: ~/bin/tfenv }
+
