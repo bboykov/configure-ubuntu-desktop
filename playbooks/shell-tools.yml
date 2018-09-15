@@ -32,6 +32,7 @@
       become: True
       with_items:
         - grip # Prereq for vim-markdown-preview plugin
+        - awscli
 
     ################
     # dotfiles
