@@ -15,6 +15,7 @@
       become: true
       with_items:
         - gnome-tweak-tool
+        - clipit
 
     - name: Set locale
       copy:
