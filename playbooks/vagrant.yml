@@ -1,5 +1,5 @@
 ---
-- name: Configure Vagrant
+- name: Configure Vagrant environment
   hosts: localhost
   tasks:
     # Note that on new laptops there are few things to consiter:

@@ -22,8 +22,6 @@
         - tmux
         - todotxt-cli
         - vim
-        - vim-gtk # to install +clipboard
-        - emacs # prereq for spacemacs
 
     - name: Install packages with PIP
       pip:
@@ -31,12 +29,9 @@
         state: present
       become: True
       with_items:
-        - grip # Prereq for vim-markdown-preview plugin
         - awscli
 
-    ################
     # dotfiles
-    ################
     - name: Check if dotfiles repo has been cloned
       stat:
         path: $HOME/dotfiles/
@@ -58,9 +53,7 @@
         executable: /bin/bash
       when: clone_dotfiles_repo.changed
 
-    ################
     # tmux
-    ################
     - name: Check if tmux TPM repo is present
       stat:
         path: ~/.tmux/plugins/tpm
@@ -74,9 +67,7 @@
         depth: 1
       when: tmux_tpm_repo_is_present.stat.exists == False
 
-    ################
     # vim
-    ################
     - name: Check if vim-plug has been installed
       stat:
         path: $HOME/.vim/autoload/plug.vim
@@ -100,19 +91,7 @@
       command: |
         vim +PlugUpdate +qall
 
-    ################
-    # spacemacs
-    ################
-    - name: Clone spacemacs repo
-      git:
-        repo: https://github.com/syl20bnr/spacemacs
-        dest: ~/.emacs.d
-        version: master
-        depth: 1
-
-    ################
     # misc
-    ################
     - name: Clone liquidprompt repo
       git:
         repo: https://github.com/nojhan/liquidprompt.git
@@ -120,9 +99,7 @@
         version: master
         depth: 1
 
-    ################
     # Terraform
-    ################
     - name: Clone tfenv repo
       git:
         repo: https://github.com/kamatama41/tfenv.git
@@ -138,4 +115,3 @@
       with_items:
         - { src: ~/.tfenv/bin/terraform , dest: ~/bin/terraform }
         - { src: ~/.tfenv/bin/tfenv , dest: ~/bin/tfenv }
-

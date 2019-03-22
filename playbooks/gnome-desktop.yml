@@ -16,6 +16,7 @@
       with_items:
         - gnome-tweak-tool
         - clipit
+        - vim-gtk
 
     - name: Set locale
       copy:
@@ -54,17 +55,14 @@
         executable: /bin/bash
       when: font_installed.changed
 
-    # Set the color theme by running `base16_tomorrow-night` in the shell
-    - name: Clone base16-shell repo
+    - name: Clone base16-shell repo # Set the color theme by running `base16_tomorrow-night` in the shell
       git:
         repo: https://github.com/chriskempson/base16-shell.git
         dest: ~/.config/base16-shell
         version: master
         depth: 1
 
-    ################
     # gsettings
-    ################
     - name: Set monospace font
       gsettings:
         schema: org.gnome.desktop.interface

@@ -1,26 +1,25 @@
-# configure-ubuntu-desktop
+# Configure work environment
 
 
 ## Usage
 
 1. Clone the repository.
 
-1. Install Ansible.
+1. Install Ansible and reload the environment.
 
 ```bash
-# Install
-bash bin/install-ansible.sh
-# Reload your environment
-source ~/.profile
+bash bin/install-ansible.sh && source ~/.profile
 ```
 
-1. Install module requirements
+1. Install module requirements.
+
 ```bash
 ansible-galaxy install -r requirements.yml
 ```
 
-1. Run Ansible playbook.
+1. Run an Ansible playbook.
 
 ```bash
-ansible-playbook -i localhost, -c local playbooks/example-playbook.yml --ask-become-pass
+alias play-local="ansible-playbook -i localhost, -c local --ask-become-pass"
+play-local playbooks/example-playbook.yml
 ```
