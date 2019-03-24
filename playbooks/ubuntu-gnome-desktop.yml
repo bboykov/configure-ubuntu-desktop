@@ -106,6 +106,17 @@
         key: show-battery-percentage
         value: "true"
 
+- name: Configure development applications
+  hosts: localhost
+  tasks:
+    - name: Install Docker
+      import_role:
+        name: docker
+      vars:
+        docker_users:
+          - bboykov
+      become: true
+
 - name: Install desktop applications
   hosts: localhost
   tasks:

@@ -15,3 +15,7 @@
 - name: dropbox
   src: https://github.com/Oefenweb/ansible-dropbox.git
   path: ./roles
+
+- name: docker
+  src: https://github.com/geerlingguy/ansible-role-docker.git
+  path: ./roles
