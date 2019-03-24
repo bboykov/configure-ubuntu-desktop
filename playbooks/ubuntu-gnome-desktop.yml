@@ -55,13 +55,6 @@
         executable: /bin/bash
       when: font_installed.changed
 
-    - name: Clone base16-shell repo # Set the color theme by running `base16_tomorrow-night` in the shell
-      git:
-        repo: https://github.com/chriskempson/base16-shell.git
-        dest: ~/.config/base16-shell
-        version: master
-        depth: 1
-
     # gsettings
     - name: Set monospace font
       gsettings:
@@ -112,3 +105,31 @@
         schema: org.gnome.desktop.interface
         key: show-battery-percentage
         value: "true"
+
+- name: Install desktop applications
+  hosts: localhost
+  tasks:
+    - name: Update the APT cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600 # 1h
+      become: true
+
+    - name: Install apps
+      apt:
+        name: "{{ item }}"
+        state: present
+      become: true
+      with_items:
+        - meld
+
+    - name: Install Google Chrome
+      import_role:
+        name: google-chrome
+
+    - name: Install Dropbox
+      import_role:
+        name: dropbox
+      vars:
+        dropbox_downloads_path: /tmp/ansible/dropbox
+      become: true
