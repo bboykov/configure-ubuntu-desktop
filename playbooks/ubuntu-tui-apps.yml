@@ -27,10 +27,9 @@
       pip:
         name: "{{ item }}"
         state: present
-      become: True
+        extra_args: --user
       with_items:
         - awscli
-        - molecule
 
     # dotfiles
     - name: Check if dotfiles repo has been cloned
