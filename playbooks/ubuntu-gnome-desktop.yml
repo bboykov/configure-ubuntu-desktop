@@ -133,14 +133,8 @@
       become: true
       with_items:
         - meld
+        - nautilus-dropbox
 
     - name: Install Google Chrome
       import_role:
         name: google-chrome
-
-    - name: Install Dropbox
-      import_role:
-        name: dropbox
-      vars:
-        dropbox_downloads_path: /tmp/ansible/dropbox
-      become: true
