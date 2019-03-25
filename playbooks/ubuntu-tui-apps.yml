@@ -30,6 +30,7 @@
       become: True
       with_items:
         - awscli
+        - molecule
 
     # dotfiles
     - name: Check if dotfiles repo has been cloned
