@@ -22,14 +22,26 @@
         - tmux
         - todotxt-cli
         - vim
+        - python-pip
+        - python3-pip
+        - libssl-dev
 
-    - name: Install packages with PIP
+    - name: Install packages with PIP with user flag
       pip:
         name: "{{ item }}"
         state: present
         extra_args: --user
       with_items:
         - awscli
+
+    - name: Install packages with PIP 3 with user flag
+      pip:
+        state: present
+        extra_args: --user
+        executable: pip3
+        name:
+          - docker
+          - molecule
 
     # dotfiles
     - name: Check if dotfiles repo has been cloned
