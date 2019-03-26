@@ -28,20 +28,19 @@
 
     - name: Install packages with PIP with user flag
       pip:
-        name: "{{ item }}"
         state: present
         extra_args: --user
-      with_items:
-        - awscli
-
-    - name: Install packages with PIP 3 with user flag
-      pip:
-        state: present
-        extra_args: --user
-        executable: pip3
         name:
-          - docker
+          - awscli
+
+    - name: Install molecule
+      import_role:
+        name: molecule
+      vars:
+        molecule_packages:
           - molecule
+          - docker
+      become: true
 
     # dotfiles
     - name: Check if dotfiles repo has been cloned
