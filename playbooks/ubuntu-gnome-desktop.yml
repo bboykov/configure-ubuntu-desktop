@@ -114,7 +114,7 @@
         name: docker
       vars:
         docker_users:
-          - bboykov
+          - "{{ lookup('env','USER') }}"
       become: true
 
 - name: Install desktop applications
@@ -138,3 +138,6 @@
     - name: Install Google Chrome
       import_role:
         name: google-chrome
+
+- name: Include TUI apps playbook
+  import_playbook: ubuntu-tui-apps.yml

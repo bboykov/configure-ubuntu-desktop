@@ -42,7 +42,8 @@
   tasks:
     # Note that on new laptops there are few things to consiter:
     # 1. Disable UEFI Secure boot or sign the virtualbox modules.
-    # See this link for further reading - https://stegard.net/2016/10/virtualbox-secure-boot-ubuntu-fail/
+    # See this link for further reading:
+    # https://stegard.net/2016/10/virtualbox-secure-boot-ubuntu-fail/
     # 2. Ensure virtualization is enabled from BIOS/UEFI
     - name: Install Virtualbox
       import_role:
@@ -61,13 +62,5 @@
         vagrant_version: 2.0.1
         vagrant_dest_path: "/tmp/ansible/vagrant_{{ vagrant_version }}"
 
-- name: Configure development applications
-  hosts: localhost
-  tasks:
-    - name: Install Docker
-      import_role:
-        name: docker
-      vars:
-        docker_users:
-          - bboykov
-      become: true
+- name: Include GNOME Desktop playbook
+  import_playbook: ubuntu-gnome-dekstop.yml
