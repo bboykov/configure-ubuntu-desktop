@@ -4,8 +4,8 @@
   tasks:
     - name: Update the APT cache
       apt:
-        update_cache: yes
-        cache_valid_time: 3600 # 1h
+        update_cache: true
+        cache_valid_time: 3600  # 1h
       become: true
 
       # https://www.tecmint.com/tlp-increase-and-optimize-linux-battery-life/
@@ -17,25 +17,23 @@
 
     - name: Install battery enchancements
       apt:
-        name: "{{ item }}"
         state: present
+        name:
+          - tlp
+          - tlp-rdw
       become: true
-      with_items:
-        - tlp
-        - tlp-rdw
 
     - name: Install graphic packages
       apt:
-        name: "{{ item }}"
         state: present
+        name:
+          - ubuntu-restricted-extras
+          - libdvdnav4
+          - libdvdread4
+          - gstreamer1.0-plugins-bad
+          - gstreamer1.0-plugins-ugly
+          - libdvd-pkg
       become: true
-      with_items:
-        - ubuntu-restricted-extras
-        - libdvdnav4
-        - libdvdread4
-        - gstreamer1.0-plugins-bad
-        - gstreamer1.0-plugins-ugly
-        - libdvd-pkg
 
 - name: Configure Vagrant environment
   hosts: localhost

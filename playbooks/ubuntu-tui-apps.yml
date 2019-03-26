@@ -4,27 +4,23 @@
   tasks:
     - name: Update APT cache
       apt:
-        update_cache: yes
-        cache_valid_time: 3600 # 1h
-      become: True
+        update_cache: true
+        cache_valid_time: 3600  # 1h
+      become: true
 
     - name: Install packages with APT
       apt:
-        name: "{{ item }}"
         state: present
-      become: True
-      with_items:
-        - bash-completion
-        - curl
-        - git
-        - xclip
-        - xsel
-        - tmux
-        - todotxt-cli
-        - vim
-        - python-pip
-        - python3-pip
-        - libssl-dev
+        name:
+          - bash-completion
+          - curl
+          - git
+          - xclip
+          - xsel
+          - tmux
+          - todotxt-cli
+          - vim
+      become: true
 
     - name: Install packages with PIP with user flag
       pip:
@@ -47,7 +43,7 @@
       stat:
         path: $HOME/dotfiles/
       register: is_dotfiles_cloned
-      changed_when: False
+      changed_when: false
 
     - name: Clone dotfiles repo
       git:
@@ -55,7 +51,7 @@
         dest: $HOME/dotfiles
         version: master
       register: clone_dotfiles_repo
-      when: is_dotfiles_cloned.stat.exists == False
+      when: is_dotfiles_cloned.stat.exists == false
 
     - name: Run dotfiles script
       shell: |
@@ -69,21 +65,21 @@
       stat:
         path: ~/.tmux/plugins/tpm
       register: tmux_tpm_repo_is_present
-      changed_when: False
+      changed_when: false
 
     - name: Clone tmux TPM repo
       git:
         repo: https://github.com/tmux-plugins/tpm
         dest: ~/.tmux/plugins/tpm
         depth: 1
-      when: tmux_tpm_repo_is_present.stat.exists == False
+      when: tmux_tpm_repo_is_present.stat.exists == false
 
     # vim
     - name: Check if vim-plug has been installed
       stat:
         path: $HOME/.vim/autoload/plug.vim
       register: is_vim_plug_installed
-      changed_when: False
+      changed_when: false
 
     - name: Install vim-plug
       shell: |
@@ -91,19 +87,20 @@
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
       args:
         executable: /bin/bash
-      when: is_vim_plug_installed.stat.exists == False
+      when: is_vim_plug_installed.stat.exists == false
 
     - name: Install plugins with vim-plug - vim +PlugInstall +qall
       command: |
         vim +PlugInstall +qall
-      when: is_vim_plug_installed.stat.exists == False
+      when: is_vim_plug_installed.stat.exists == false
 
     - name: Update plugins with vim-plug - vim +PlugUpdate +qall
       command: |
         vim +PlugUpdate +qall
 
     # misc
-    - name: Clone base16-shell repo # Set the color theme by running `base16_monokai` in the shell
+    ## Set the color theme by running `base16_monokai` in the shell
+    - name: Clone base16-shell repo
       git:
         repo: https://github.com/chriskempson/base16-shell.git
         dest: ~/.config/base16-shell
