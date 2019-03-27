@@ -61,4 +61,4 @@
         vagrant_dest_path: "/tmp/ansible/vagrant_{{ vagrant_version }}"
 
 - name: Include GNOME Desktop playbook
-  import_playbook: ubuntu-gnome-dekstop.yml
+  import_playbook: ubuntu-gnome-desktop.yml
