@@ -1,0 +1,11 @@
+---
+- name: Configure Windows Subsystem for Linux (Ubuntu)
+  hosts: localhost
+  tasks:
+    # This task asumes that the src direcory is manually configured a cloud
+    # storage service.
+    - name: Create symlink to the notes directory
+      file:
+        src: /mnt/c/Users/bboykov/notes
+        dest: $HOME/notes
+        state: link
