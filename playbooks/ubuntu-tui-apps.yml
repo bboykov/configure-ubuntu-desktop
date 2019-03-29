@@ -8,6 +8,12 @@
         cache_valid_time: 3600  # 1h
       become: true
 
+    - name: Ensure workdir exists
+      file:
+        path: $HOME/wd
+        state: directory
+        mode: 0755
+
     - name: Install packages with APT
       apt:
         state: present
@@ -20,7 +26,7 @@
           - tmux
           - todotxt-cli
           - vim
-          - vim-gtk # copy/paste from system clipboard
+          - vim-gtk   # copy/paste from system clipboard
       become: true
 
     - name: Install packages with PIP with user flag
