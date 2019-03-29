@@ -20,6 +20,7 @@
           - tmux
           - todotxt-cli
           - vim
+          - vim-gtk # copy/paste from system clipboard
       become: true
 
     - name: Install packages with PIP with user flag
