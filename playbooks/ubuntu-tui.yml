@@ -1,0 +1,32 @@
+---
+- name: Configure the terminal environment
+  hosts: localhost
+
+  vars_files:
+    - ../config-vars.yml
+
+  tasks:
+    - name: Ensure directories exists
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: 0755
+      with_items:
+        - "{{ ensure_directories }}"
+
+    - name: Update apt cache
+      apt:
+        update_cache: true
+        cache_valid_time: 3600  # 1h
+      become: true
+
+    - name: Install apt packages
+      apt:
+        state: present
+        name: "{{ ubuntu_tui_apt_packages }}"
+      become: true
+
+    - name: Run dotfiles tasks
+      include_tasks: ../tasks/dotfiles.yml
+      tags:
+        - dotfiles

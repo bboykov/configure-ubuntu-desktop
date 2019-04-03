@@ -1,0 +1,13 @@
+---
+ensure_directories:
+  - $HOME/wd
+
+ubuntu_tui_apt_packages:
+  - git
+  - bash-completion
+  - curl
+  - htop
+
+dotfiles_repo_url: https://github.com/bboykov/dotfiles.git
+dotfiles_repo_branch: reset
+dotfiles_repo_dest: $HOME/dotfiles

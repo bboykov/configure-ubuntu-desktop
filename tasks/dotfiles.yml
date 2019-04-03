@@ -1,0 +1,15 @@
+---
+- name: Clone dotfiles repo
+  git:
+    repo: "{{ dotfiles_repo_url }}"
+    dest: "{{ dotfiles_repo_dest }}"
+    version: "{{ dotfiles_repo_branch }}"
+  register: clone_dotfiles_repo
+
+- name: Run dotfiles script
+  shell: |
+    ./dotfiles.sh
+  args:
+    executable: /bin/bash
+    chdir: "{{ dotfiles_repo_dest }}"
+  when: clone_dotfiles_repo.changed
