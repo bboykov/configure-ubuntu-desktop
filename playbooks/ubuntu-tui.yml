@@ -37,3 +37,8 @@
         dest: "$HOME/liquidprompt"
         version: master
         depth: 1
+
+    - name: Run VIM tasks
+      include_tasks: ../tasks/vim.yml
+      tags:
+        - vim
