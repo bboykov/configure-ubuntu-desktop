@@ -42,3 +42,8 @@
       include_tasks: ../tasks/vim.yml
       tags:
         - vim
+
+    - name: Run TMUX tasks
+      include_tasks: ../tasks/tmux.yml
+      tags:
+        - tmux

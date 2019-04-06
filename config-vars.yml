@@ -8,6 +8,7 @@ ubuntu_tui_apt_packages:
   - curl
   - htop
   - vim
+  - tmux
 
 dotfiles_repo_url: https://github.com/bboykov/dotfiles.git
 dotfiles_repo_branch: reset
