@@ -1,0 +1,4 @@
+---
+- name: homebrew
+  src: https://github.com/geerlingguy/ansible-role-homebrew.git
+  path: ./roles

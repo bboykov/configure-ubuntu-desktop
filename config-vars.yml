@@ -10,6 +10,22 @@ ubuntu_tui_apt_packages:
   - vim
   - tmux
 
+homebrew_installed_packages:
+  - bash-completion
+  - git
+  - tmux
+
+homebrew_taps:
+  - homebrew/core
+  - homebrew/cask
+
+
+homebrew_cask_appdir: /Applications
+homebrew_cask_apps:
+  - google-chrome
+  - macvim
+  - slack
+
 dotfiles_repo_url: https://github.com/bboykov/dotfiles.git
 dotfiles_repo_branch: reset
 dotfiles_repo_dest: $HOME/dotfiles

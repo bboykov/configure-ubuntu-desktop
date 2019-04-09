@@ -9,6 +9,12 @@
 bash install-ansible.sh
 ```
 
+1. Install requirements
+
+```bash
+ansible-galaxy install -r requirements.yml
+```
+
 1. Run an Ansible playbook.
 
 ```bash
