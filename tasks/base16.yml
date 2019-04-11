@@ -8,5 +8,5 @@
   register: is_base16_repo_cloned
 
 - name: Set base16_monokai theme
-  command: bash -i -c "base16_monokai"
+  command: bash -i -c "base16_monokai;exit"
   when: is_base16_repo_cloned.changed
