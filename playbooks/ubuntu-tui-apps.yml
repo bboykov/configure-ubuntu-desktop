@@ -94,7 +94,7 @@
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
       args:
         executable: /bin/bash
-      when: is_vim_plug_installed.stat.exists == false
+      when: is_vim_plug_installed.stat.exists == "false"
 
     - name: Install plugins with vim-plug - vim +PlugInstall +qall
       command: |

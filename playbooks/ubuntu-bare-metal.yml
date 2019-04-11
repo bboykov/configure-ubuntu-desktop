@@ -47,7 +47,7 @@
       import_role:
         name: virtualbox
       vars:
-        virtualbox_version: 5.2
+        virtualbox_version: 6.0
         virtualbox_group_members:
           - root
           - "{{ lookup('env','USER') }}"
@@ -57,8 +57,8 @@
       import_role:
         name: vagrant
       vars:
-        vagrant_version: 2.0.1
-        vagrant_dest_path: "/tmp/ansible/vagrant_{{ vagrant_version }}"
+        vagrant_version: 2.2.4
+        vagrant_dest_path: "/tmp/vagrant_{{ vagrant_version }}"
 
-- name: Include GNOME Desktop playbook
-  import_playbook: ubuntu-gnome-desktop.yml
+# - name: Include GNOME Desktop playbook
+#   import_playbook: ubuntu-gnome-desktop.yml
