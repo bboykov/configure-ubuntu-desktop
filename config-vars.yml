@@ -13,6 +13,7 @@ ubuntu_tui_apt_packages:
 homebrew_installed_packages:
   - bash-completion
   - git
+  - reattach-to-user-namespace
   - tmux
 
 homebrew_taps:
