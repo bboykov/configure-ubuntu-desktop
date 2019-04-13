@@ -25,12 +25,10 @@
       tags:
         - dotfiles
 
-    - name: Clone liquidprompt repo
-      git:
-        repo: https://github.com/nojhan/liquidprompt.git
-        dest: "$HOME/liquidprompt"
-        version: master
-        depth: 1
+    - name: Run liquidprompt tasks
+      include_tasks: ../tasks/liquidprompt.yml
+      tags:
+        - ps1
 
     - name: Run VIM tasks
       include_tasks: ../tasks/vim.yml

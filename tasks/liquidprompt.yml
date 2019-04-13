@@ -1,0 +1,7 @@
+---
+- name: Clone liquidprompt repo
+  git:
+    repo: https://github.com/nojhan/liquidprompt.git
+    dest: "$HOME/liquidprompt"
+    version: master
+    depth: 1
