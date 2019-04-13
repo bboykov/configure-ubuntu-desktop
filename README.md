@@ -1,17 +1,15 @@
-# Configure work environment
+# Configure workstation
 
-
-## Usage
 
 1. Clone the repository.
 
-1. Install Ansible and reload the environment.
+1. Install Ansible
 
 ```bash
-bash bin/install-ansible.sh && source ~/.profile
+bash install-ansible.sh
 ```
 
-1. Install module requirements.
+1. Install requirements
 
 ```bash
 ansible-galaxy install -r requirements.yml
@@ -20,6 +18,6 @@ ansible-galaxy install -r requirements.yml
 1. Run an Ansible playbook.
 
 ```bash
-alias play-local="ansible-playbook -i localhost, -c local --ask-become-pass"
-play-local playbooks/example-playbook.yml
+alias ansible-local="ansible-playbook -i localhost, -c local --ask-become-pass"
+ansible-local playbooks/example-playbook.yml
 ```

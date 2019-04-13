@@ -1,21 +1,4 @@
-# Usage:
-# ansible-galaxy install -r  ansible/requirements.yml
-- name: virtualbox
-  src: https://github.com/escalate/ansible-virtualbox.git
-  path: ./roles
-
-- name: vagrant
-  src: https://github.com/rsjethani/ansible-role-vagrant.git
-  path: ./roles
-
-- name: google-chrome
-  src: https://github.com/patrick-hill/ansible-role-chrome.git
-  path: ./roles
-
-- name: docker
-  src: https://github.com/geerlingguy/ansible-role-docker.git
-  path: ./roles
-
-- name: molecule
-  src: https://github.com/robertdebock/ansible-role-molecule.git
+---
+- name: homebrew
+  src: https://github.com/geerlingguy/ansible-role-homebrew.git
   path: ./roles

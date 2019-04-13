@@ -1,0 +1,25 @@
+---
+- name: Check if vim-plug has been installed
+  stat:
+    path: $HOME/.vim/autoload/plug.vim
+  register: is_vim_plug_installed
+  changed_when: false
+
+- name: Install vim-plug
+  shell: |
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  args:
+    warn: false
+    executable: /bin/bash
+  when: not is_vim_plug_installed.stat.exists
+
+- name: Install plugins with vim-plug - vim +PlugInstall +qall
+  command: |
+    vim +PlugInstall +qall
+  when: not is_vim_plug_installed.stat.exists
+
+- name: Update plugins with vim-plug - vim +PlugUpdate +qall
+  command: |
+    vim +PlugUpdate +qall
+  when: is_vim_plug_installed.stat.exists

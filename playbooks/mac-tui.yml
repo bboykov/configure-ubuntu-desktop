@@ -1,0 +1,48 @@
+---
+- name: Configure the terminal environment on Mac
+  hosts: localhost
+
+  vars_files:
+    - ../config-vars.yml
+
+  tasks:
+    - name: Ensure directories exists
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: 0755
+      with_items:
+        - "{{ ensure_directories }}"
+
+    - name: Install packages via homebrew
+      import_role:
+        name: homebrew
+      tags:
+        - homebrew
+
+    - name: Run dotfiles tasks
+      include_tasks: ../tasks/dotfiles.yml
+      tags:
+        - dotfiles
+
+    - name: Run base16 shell tasks
+      include_tasks: ../tasks/base16.yml
+      tags:
+        - base16
+
+    - name: Clone liquidprompt repo
+      git:
+        repo: https://github.com/nojhan/liquidprompt.git
+        dest: "$HOME/liquidprompt"
+        version: master
+        depth: 1
+
+    - name: Run VIM tasks
+      include_tasks: ../tasks/vim.yml
+      tags:
+        - vim
+
+    - name: Run TMUX tasks
+      include_tasks: ../tasks/tmux.yml
+      tags:
+        - tmux

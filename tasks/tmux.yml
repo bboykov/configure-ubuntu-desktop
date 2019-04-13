@@ -1,0 +1,44 @@
+---
+- name: Check if tmux TPM repo is present
+  stat:
+    path: ~/.tmux/plugins/tpm
+  register: tmux_tpm_repo_is_present
+  changed_when: false
+
+- name: Clone tmux TPM repo
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins/tpm
+    depth: 1
+  when: not tmux_tpm_repo_is_present.stat.exists
+
+- name: Reload TMUX to source TPM
+  command: |
+    tmux new-session -d "sleep 1"
+    sleep 0.1
+    tmux source ~/.tmux.conf
+  changed_when: false
+  when: not tmux_tpm_repo_is_present.stat.exists
+
+- name: Install TMUX plugins
+  shell: |
+    tmux new-session -d "sleep 1"
+    sleep 0.1
+    ~/.tmux/plugins/tpm/bin/install_plugins
+  args:
+    executable: /bin/bash
+  when: not tmux_tpm_repo_is_present.stat.exists
+
+- name: Update TMUX plugins
+  shell: |
+    tmux new-session -d "sleep 1"
+    sleep 0.1
+    ~/.tmux/plugins/tpm/bin/update_plugins all
+  when: tmux_tpm_repo_is_present.stat.exists
+
+- name: Clean TMUX plugins
+  shell: |
+    tmux new-session -d "sleep 1"
+    sleep 0.1
+    ~/.tmux/plugins/tpm/bin/clean_plugins
+  when: tmux_tpm_repo_is_present.stat.exists

@@ -1,0 +1,23 @@
+---
+- name: Check if dotfiles repo has been cloned
+  stat:
+    path: $HOME/dotfiles/
+  register: is_dotfiles_cloned
+  changed_when: false
+
+- name: Clone dotfiles repo
+  git:
+    repo: "{{ dotfiles_repo_url }}"
+    dest: "{{ dotfiles_repo_dest }}"
+    version: "{{ dotfiles_repo_branch }}"
+    force: false
+  register: clone_dotfiles_repo
+  when: not is_dotfiles_cloned.stat.exists
+
+- name: Run dotfiles script
+  shell: |
+    ./dotfiles.sh
+  args:
+    executable: /bin/bash
+    chdir: "{{ dotfiles_repo_dest }}"
+  when: clone_dotfiles_repo.changed
