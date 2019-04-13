@@ -25,11 +25,6 @@
       tags:
         - dotfiles
 
-    - name: Run base16 shell tasks
-      include_tasks: ../tasks/base16.yml
-      tags:
-        - base16
-
     - name: Clone liquidprompt repo
       git:
         repo: https://github.com/nojhan/liquidprompt.git
@@ -41,6 +36,11 @@
       include_tasks: ../tasks/vim.yml
       tags:
         - vim
+
+    - name: Run base16 shell tasks
+      include_tasks: ../tasks/base16.yml
+      tags:
+        - base16
 
     - name: Run TMUX tasks
       include_tasks: ../tasks/tmux.yml
