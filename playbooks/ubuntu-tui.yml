@@ -20,10 +20,27 @@
         cache_valid_time: 3600  # 1h
       become: true
 
-    - name: Install apt packages
+    - name: Install Ubuntu TUI apt packages
       apt:
         state: present
         name: "{{ ubuntu_tui_apt_packages }}"
+      become: true
+
+    - name: Set locales
+      import_role:
+        name: locales
+      vars:
+        locales_default:
+          lang: en_US.UTF-8
+          lc_name: en_GB.UTF-8
+          lc_time: en_DK.UTF-8
+          lc_paper: en_GB.UTF-8
+          lc_numeric: en_GB.UTF-8
+          lc_address: en_GB.UTF-8
+          lc_monetary: en_GB.UTF-8
+          lc_measurement: en_GB.UTF-8
+      tags:
+        - locales
       become: true
 
     - name: Run dotfiles tasks

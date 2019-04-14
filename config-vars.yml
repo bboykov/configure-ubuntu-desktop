@@ -11,6 +11,10 @@ ubuntu_tui_apt_packages:
   - vim-gtk
   - tmux
 
+ubuntu_gnome_desktop_apt_packages:
+  - gnome-tweak-tool
+  - meld
+
 homebrew_installed_packages:
   - bash-completion
   - git

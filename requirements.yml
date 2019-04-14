@@ -2,3 +2,11 @@
 - name: homebrew
   src: https://github.com/geerlingguy/ansible-role-homebrew.git
   path: ./roles
+
+- name: powerline-fonts
+  src: https://github.com/sicruse/ansible-powerline-fonts.git
+  path: ./roles
+
+- name: locales
+  src: https://github.com/Oefenweb/ansible-locales.git
+  path: ./roles
