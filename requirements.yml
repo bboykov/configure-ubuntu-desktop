@@ -10,3 +10,15 @@
 - name: locales
   src: https://github.com/Oefenweb/ansible-locales.git
   path: ./roles
+
+- name: virtualbox
+  src: https://github.com/escalate/ansible-virtualbox.git
+  path: ./roles
+
+- name: vagrant
+  src: https://github.com/rsjethani/ansible-role-vagrant.git
+  path: ./roles
+
+- name: google-chrome
+  src: https://github.com/patrick-hill/ansible-role-chrome.git
+  path: ./roles
