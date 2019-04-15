@@ -28,6 +28,8 @@ homebrew_installed_packages:
   - git
   - reattach-to-user-namespace
   - tmux
+  - go
+  - dep
 
 homebrew_taps:
   - homebrew/core
