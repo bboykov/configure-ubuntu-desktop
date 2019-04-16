@@ -49,3 +49,6 @@ homebrew_cask_apps:
 dotfiles_repo_url: https://github.com/bboykov/dotfiles.git
 dotfiles_repo_branch: master
 dotfiles_repo_dest: $HOME/dotfiles
+
+ubuntu_wsl_drive_src_dir: /mnt/c/Users/bboykov/drive
+ubuntu_wsl_drive_dest_dir: $HOME/drive
