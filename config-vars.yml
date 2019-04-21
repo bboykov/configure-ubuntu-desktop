@@ -14,6 +14,7 @@ ubuntu_tui_apt_packages:
 ubuntu_gnome_desktop_apt_packages:
   - gnome-tweak-tool
   - meld
+  - clipit
 
 ubuntu_bare_metal_apt_packages:
   - ubuntu-restricted-extras

@@ -12,7 +12,7 @@
   path: ./roles
 
 - name: virtualbox
-  src: https://github.com/escalate/ansible-virtualbox.git
+  src: https://github.com/bboykov/ansible-role-virtualbox.git
   path: ./roles
 
 - name: vagrant
