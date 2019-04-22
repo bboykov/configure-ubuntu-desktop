@@ -6,15 +6,6 @@
     - ../config-vars.yml
 
   tasks:
-    - name: Install Powerline fonts
-      import_role:
-        name: powerline-fonts
-      vars:
-        all_fonts:
-          - DejaVuSansMono
-      tags:
-        - fonts
-
     - name: Install Google Chrome
       import_role:
         name: google-chrome
