@@ -31,6 +31,7 @@ homebrew_installed_packages:
   - git
   - reattach-to-user-namespace
   - tmux
+  - todo-txt
   - go
   - dep
   - kubernetes-cli
