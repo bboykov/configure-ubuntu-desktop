@@ -10,6 +10,7 @@ ubuntu_tui_apt_packages:
   - xsel
   - vim-gtk
   - tmux
+  - todotxt-cli
 
 ubuntu_gnome_desktop_apt_packages:
   - gnome-tweak-tool
