@@ -49,6 +49,7 @@ homebrew_cask_apps:
   - macvim
   - slack
   - docker
+  - visual-studio-code
 
 dotfiles_repo_url: https://github.com/bboykov/dotfiles.git
 dotfiles_repo_branch: master
