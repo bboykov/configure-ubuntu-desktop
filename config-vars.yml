@@ -12,6 +12,11 @@ ubuntu_tui_apt_packages:
   - tmux
   - todotxt-cli
 
+ubuntu_wsl_apt_packages:
+  - tmux
+  - vim-gtk
+  - todotxt-cli
+
 ubuntu_gnome_desktop_apt_packages:
   - gnome-tweak-tool
   - meld

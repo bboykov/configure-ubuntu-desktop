@@ -14,11 +14,47 @@
         dest: "{{ ubuntu_wsl_drive_dest_dir }}"
         state: link
 
-    - name: Set the wsl.conf
-      copy:
-        content: |
-          [automount]
-          enabled = true
-          options = "metadata,umask=22,fmask=11"
-        dest: /etc/wsl.conf
+    - name: Ensure directories exists
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: 0755
+      with_items:
+        - "{{ ensure_directories }}"
+
+    - name: Update apt cache
+      apt:
+        update_cache: true
+        cache_valid_time: 3600  # 1h
       become: true
+
+    - name: Install Ubuntu apt packages
+      apt:
+        state: present
+        name: "{{ ubuntu_wsl_apt_packages }}"
+      become: true
+
+    - name: Run dotfiles tasks
+      include_tasks: ../tasks/dotfiles.yml
+      tags:
+        - dotfiles
+
+    - name: Run liquidprompt tasks
+      include_tasks: ../tasks/liquidprompt.yml
+      tags:
+        - ps1
+
+    - name: Run VIM tasks
+      include_tasks: ../tasks/vim.yml
+      tags:
+        - vim
+
+    - name: Run base16 shell tasks
+      include_tasks: ../tasks/base16.yml
+      tags:
+        - base16
+
+    - name: Run TMUX tasks
+      include_tasks: ../tasks/tmux.yml
+      tags:
+        - tmux
