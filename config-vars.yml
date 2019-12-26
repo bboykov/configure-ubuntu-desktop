@@ -8,6 +8,7 @@ ubuntu_tui_apt_packages:
   - curl
   - htop
   - xsel
+  - xclip
   - vim-gtk
   - tmux
   - todotxt-cli
