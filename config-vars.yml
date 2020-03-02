@@ -22,15 +22,6 @@ ubuntu_gnome_desktop_apt_packages:
   - gnome-tweak-tool
   - meld
   - clipit
-  - fonts-powerline
-
-ubuntu_bare_metal_apt_packages:
-  - ubuntu-restricted-extras
-  - libdvdnav4
-  - libdvdread4
-  - gstreamer1.0-plugins-bad
-  - gstreamer1.0-plugins-ugly
-  - libdvd-pkg
 
 homebrew_installed_packages:
   - bash-completion
