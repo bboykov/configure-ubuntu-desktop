@@ -3,26 +3,6 @@
   src: https://github.com/geerlingguy/ansible-role-homebrew.git
   path: ./roles
 
-- name: powerline-fonts
-  src: https://github.com/sicruse/ansible-powerline-fonts.git
-  path: ./roles
-
 - name: locales
   src: https://github.com/Oefenweb/ansible-locales.git
-  path: ./roles
-
-- name: virtualbox
-  src: https://github.com/bboykov/ansible-role-virtualbox.git
-  path: ./roles
-
-- name: vagrant
-  src: https://github.com/rsjethani/ansible-role-vagrant.git
-  path: ./roles
-
-- name: google-chrome
-  src: https://github.com/patrick-hill/ansible-role-chrome.git
-  path: ./roles
-
-- name: docker
-  src: https://github.com/geerlingguy/ansible-role-docker.git
   path: ./roles
