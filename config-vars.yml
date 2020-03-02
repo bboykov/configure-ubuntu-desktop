@@ -12,6 +12,7 @@ ubuntu_tui_apt_packages:
   - vim-gtk
   - tmux
   - todotxt-cli
+  - nodejs
 
 ubuntu_wsl_apt_packages:
   - tmux

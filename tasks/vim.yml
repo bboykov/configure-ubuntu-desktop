@@ -23,3 +23,8 @@
   command: |
     vim +PlugUpdate +qall
   when: is_vim_plug_installed.stat.exists
+
+- name: Clean plugins with vim-plug - vim +PlugClean +qall
+  command: |
+    vim +PlugClean +qall
+  when: is_vim_plug_installed.stat.exists

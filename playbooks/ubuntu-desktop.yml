@@ -1,23 +1,4 @@
 ---
-- name: Configure system settings
-  hosts: localhost
-
-  vars_files:
-    - ../config-vars.yml
-
-  tasks:
-    - name: Install Google Chrome
-      import_role:
-        name: google-chrome
-
-    - name: Install Docker
-      import_role:
-        name: docker
-      vars:
-        docker_users:
-          - "{{ lookup('env','USER') }}"
-      become: true
-
 - name: Configure GNOME desktop settings
   hosts: localhost
 
@@ -37,20 +18,14 @@
         name: "{{ ubuntu_gnome_desktop_apt_packages }}"
       become: true
 
-    # gsettings
-    - name: Set monospace font
-      gsettings:
-        schema: org.gnome.desktop.interface
-        key: monospace-font-name
-        value: "DejaVu Sans Mono for Powerline 11"
-
-    # High resolutions make text smaller.
-    # https://askubuntu.com/questions/60044/how-do-i-change-the-font-dpi-settings
-    - name: Set text scaling factor
-      gsettings:
-        schema: org.gnome.desktop.interface
-        key: text-scaling-factor
-        value: 1.3
+    # This depends on the screen(s). Better to be manual setup
+    # # High resolutions make text smaller.
+    # # https://askubuntu.com/questions/60044/how-do-i-change-the-font-dpi-settings
+    # - name: Set text scaling factor
+    #   gsettings:
+    #     schema: org.gnome.desktop.interface
+    #     key: text-scaling-factor
+    #     value: 1.1
 
     - name: Set clock-show-date
       gsettings:
