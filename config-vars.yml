@@ -22,7 +22,6 @@ ubuntu_wsl_apt_packages:
 ubuntu_gnome_desktop_apt_packages:
   - gnome-tweak-tool
   - meld
-  - clipit
 
 homebrew_installed_packages:
   - bash-completion
