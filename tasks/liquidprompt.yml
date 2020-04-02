@@ -1,7 +1,7 @@
 ---
 - name: Clone liquidprompt repo
   git:
-    repo: https://github.com/nojhan/liquidprompt.git
+    repo: https://github.com/bboykov/liquidprompt.git
     dest: "$HOME/liquidprompt"
     version: master
     depth: 1
