@@ -13,6 +13,7 @@ ubuntu_tui_apt_packages:
   - tmux
   - todotxt-cli
   - nodejs
+  - hub
 
 ubuntu_wsl_apt_packages:
   - tmux
