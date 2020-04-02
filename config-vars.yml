@@ -34,10 +34,10 @@ homebrew_installed_packages:
   - dep
   - awscli
   - kubernetes-cli
-  # - kubernetes-helm # older version is in use
-  - https://raw.githubusercontent.com/Homebrew/homebrew-core/78d64252f30a12b6f4b3ce29686ab5e262eea812/Formula/kubernetes-helm.rb
+  - stern
   - gnupg
   - pinentry-mac
+  - hub
 
 homebrew_taps:
   - homebrew/core
