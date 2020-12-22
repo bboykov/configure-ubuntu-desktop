@@ -1,9 +1,9 @@
 ---
-- name: Configure the terminal environment
+- name: Configure the Ubuntu terminal environment
   hosts: localhost
 
   vars_files:
-    - ../config-vars.yml
+    - ../vars.yml
 
   tasks:
     - name: Ensure directories exists

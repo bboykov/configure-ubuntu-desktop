@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
+IFS=$'\n\t'
+
+readonly WORKDIR="${HOME}/configure-workstation"
+
+detect_platform(){
+  case "${OSTYPE}" in
+    darwin*)
+      readonly RUNNING_PLATFORM="macos"
+      ;;
+    linux*)
+      local distro=$(awk -F= '/^NAME/{print $2}' /etc/os-release)
+      if [[ ${distro} =~ "Ubuntu" ]]; then
+        if [[ $(cat /proc/version) =~ "microsoft" ]]; then
+          readonly RUNNING_PLATFORM="wsl-ubuntu"
+        else
+          readonly RUNNING_PLATFORM="ubuntu"
+        fi
+      else
+        echo "Unsupported OS type: $OSTYPE" >&2
+        exit 1
+      fi
+      ;;
+    *)
+      echo "Unsupported OS type: $OSTYPE" >&2
+      exit 1
+      ;;
+  esac
+
+  echo "The script is running on ${RUNNING_PLATFORM}"
+
+}
+
+install_ansible(){
+  case "${RUNNING_PLATFORM}" in
+    macos*)
+      sudo easy_install pip
+      ;;
+    *ubuntu*)
+      sudo apt-get update
+      sudo apt install -y git python3-pip
+  esac
+
+  sudo -H pip3 install "ansible==2.10.4"
+
+}
+
+configure_macos(){
+  ansible-galaxy install -r requirements.yml
+  ansible-playbook -i localhost, -c local --ask-become-pass playbooks/mac-tui.yml
+
+}
+
+configure_wsl_ubuntu(){
+  ansible-galaxy install -r requirements.yml
+  ansible-playbook -i localhost, -c local --ask-become-pass playbooks/ubuntu-wsl.yml
+
+}
+
+configure_ubuntu(){
+  ansible-galaxy install -r requirements.yml
+  ansible-playbook -i localhost, -c local --ask-become-pass playbooks/ubuntu-tui.yml
+
+  echo "[INFO] If this is a Ubuntu desktop installation consider running the ubuntu-desktop.yml playbook"
+}
+
+main(){
+  local is_ansible_installed
+
+  cd ${WORKDIR}
+
+  detect_platform
+
+  install_ansible
+
+  case "${RUNNING_PLATFORM}" in
+    macos*)
+    configure_macos
+    ;;
+    wsl-ubuntu)
+    configure_wsl_ubuntu
+    ;;
+    ubuntu)
+    configure_ubuntu
+    ;;
+  esac
+
+}
+
+main "$@"

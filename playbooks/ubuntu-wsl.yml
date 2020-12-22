@@ -3,7 +3,7 @@
   hosts: localhost
 
   vars_files:
-    - ../config-vars.yml
+    - ../vars.yml
 
   tasks:
     # This task asumes that the src direcory is manually configured with cloud

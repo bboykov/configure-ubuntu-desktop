@@ -1,4 +1,6 @@
 ---
+ansible_python_interpreter: /usr/bin/python3
+
 ensure_directories:
   - $HOME/wd
 
@@ -13,12 +15,12 @@ ubuntu_tui_apt_packages:
   - tmux
   - todotxt-cli
   - nodejs
-  - hub
 
 ubuntu_wsl_apt_packages:
   - tmux
   - vim-gtk
   - todotxt-cli
+  - chrony
 
 ubuntu_gnome_desktop_apt_packages:
   - gnome-tweak-tool
@@ -39,7 +41,6 @@ homebrew_installed_packages:
   - gnupg
   - pinentry-mac
   - hub
-  - thefuck
 
 homebrew_taps:
   - homebrew/core
