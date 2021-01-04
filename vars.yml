@@ -35,12 +35,11 @@ homebrew_installed_packages:
   - shfmt
   - go
   - dep
-  - awscli
   - kubernetes-cli
   - stern
   - gnupg
   - pinentry-mac
-  - hub
+  - gh
 
 homebrew_taps:
   - homebrew/core
@@ -53,7 +52,6 @@ homebrew_cask_apps:
   - macvim
   - slack
   - docker
-  - visual-studio-code
 
 dotfiles_repo_url: https://github.com/bboykov/dotfiles.git
 dotfiles_repo_branch: master
