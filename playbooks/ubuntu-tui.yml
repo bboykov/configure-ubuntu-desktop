@@ -14,6 +14,17 @@
       with_items:
         - "{{ ensure_directories }}"
 
+    - name: Add gh apt key by id from a keyserver
+      apt_key:
+        keyserver: keyserver.ubuntu.com
+        id: C99B11DEB97541F0
+        state: present
+
+    - name: Add gh repository into sources list
+      apt_repository:
+        repo: deb https://cli.github.com/packages focal main
+        state: present
+
     - name: Update apt cache
       apt:
         update_cache: true
